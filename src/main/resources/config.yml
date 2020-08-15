@@ -1,0 +1,19 @@
+
+database:
+  tablePrefix: 'netzach_'
+  jdbcUrl: 'jdbc:sqlite:./plugins/Netzach/data.db'
+  #jdbcUrl: 'jdbc:mysql://localhost:3306/database'
+  properties:
+    #username: root
+    #password: pass
+    connectionTimeout: 5000
+    maximumPoolSize: 10
+    maxLifetime: 1800000
+  dataSourceProperties:
+    useUnicode: true
+    characterEncoding: utf8
+    cachePrepStmts: true
+    prepStmtCacheSize: 64
+    prepStmtCacheSqlLimit: 256
+    #useSSL: false
+    #verifyServerCertificate: false

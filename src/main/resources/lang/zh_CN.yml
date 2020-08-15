@@ -1,0 +1,6 @@
+
+load:
+  database: '数据库初始化完成'
+  complete: 'Netzach 加载完成'
+database:
+  unknown_protocol: '&未知的 jdbc 协议 {0}'
