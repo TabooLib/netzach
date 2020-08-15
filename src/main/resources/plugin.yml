@@ -1,0 +1,5 @@
+name: Netzach
+version: ${version}
+main: io.izzel.netzach.Netzach
+api-version: "1.13"
+authors: [IzzelAliz]
