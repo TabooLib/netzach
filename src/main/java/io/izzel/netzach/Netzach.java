@@ -3,10 +3,12 @@ package io.izzel.netzach;
 import io.izzel.netzach.config.ConfigSpec;
 import io.izzel.netzach.data.DataManager;
 import io.izzel.taboolib.loader.Plugin;
+import io.izzel.taboolib.module.dependency.Dependency;
 import io.izzel.taboolib.module.locale.TLocale;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.CustomClassLoaderConstructor;
 
+@Dependency(maven = "com.h2database:h2:1.4.200")
 public final class Netzach extends Plugin {
 
     private ConfigSpec configSpec;

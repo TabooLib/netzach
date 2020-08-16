@@ -1,7 +1,7 @@
 
 database:
   tablePrefix: 'netzach_'
-  jdbcUrl: 'jdbc:sqlite:./plugins/Netzach/data.db'
+  jdbcUrl: 'jdbc:h2:file:./plugins/Netzach/data.db'
   #jdbcUrl: 'jdbc:mysql://localhost:3306/database'
   properties:
     #username: root

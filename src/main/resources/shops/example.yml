@@ -1,0 +1,16 @@
+layout:
+  'XXXXXXXXX'
+  'IIIIIIIII'
+  'IIIIIIIII'
+  'IIIIIIIII'
+  'IIIIIIIII'
+  'XXAXBXCXX'
+layout-button:
+  X:
+    type: item
+  I:
+    type: slot
+
+default-setting:
+  location: flow
+  #permission: some

@@ -4,9 +4,12 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.util.PropertyElf;
 import io.izzel.netzach.Netzach;
+import io.izzel.netzach.data.entity.ItemRecord;
+import io.izzel.netzach.data.entity.LogRecord;
 import io.izzel.taboolib.module.locale.TLocale;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -20,8 +23,8 @@ public class DataManager {
         hikariConfig.setJdbcUrl(jdbcUrl);
         hikariConfig.setPoolName("Netzach");
 
-        if (jdbcUrl.startsWith("jdbc:sqlite")) {
-            hikariConfig.setDriverClassName("org.sqlite.JDBC");
+        if (jdbcUrl.startsWith("jdbc:h2")) {
+            hikariConfig.setDriverClassName("org.h2.Driver");
         } else if (jdbcUrl.startsWith("jdbc:mysql")) {
             hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
         }
@@ -34,7 +37,23 @@ public class DataManager {
         dataSourceProp.putAll(Netzach.config().database().dataSourceProperties());
         hikariConfig.setDataSourceProperties(dataSourceProp);
         this.dataSource = new HikariDataSource(hikariConfig);
-        TLocale.sendToConsole("load.database");
+        this.setup();
+    }
+
+    private void setup() {
+        try (Connection connection = connection()) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                String.format(ItemRecord.CREATE_TABLE, Netzach.config().database().tablePrefix() + "items"))) {
+                statement.execute();
+            }
+            try (PreparedStatement statement = connection.prepareStatement(
+                String.format(LogRecord.CREATE_TABLE, Netzach.config().database().tablePrefix() + "logs"))) {
+                statement.execute();
+            }
+            TLocale.sendToConsole("load.database");
+        } catch (Throwable t) {
+            TLocale.sendToConsole("load.database-error", t);
+        }
     }
 
     public void close() {
